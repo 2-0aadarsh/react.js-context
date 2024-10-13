@@ -10,7 +10,9 @@ function App() {
   return (
     <div className="bg-blue-950 h-screen text-white pt-4">
        
-       <nav className="max-w-screen-lg mx-auto px-6 py-3 text-2xl border flex justify-between">
+       <nav 
+          className="max-w-screen-lg mx-auto px-6 py-3 text-2xl flex justify-evenly"
+        >
           <NavLink to="/">Home</NavLink>
           <NavLink to="/users">Users</NavLink>
           <NavLink to="/products">Products</NavLink>

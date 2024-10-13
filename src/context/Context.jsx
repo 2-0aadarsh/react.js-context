@@ -1,20 +1,34 @@
-import { createContext, useState } from "react";
+import instance from "../utils/axios";
+import { createContext, useEffect, useState } from "react";
 
 export const UserContext = createContext();
 
 const Context = (props) => {
 
-    const [user, setUser] = useState([
-        {id:1, name : "Rahul"},
-        {id:2, name : "Aman"},
-        {id:3, name : "Shivam"},
-    ])
+    const [user, setUser] = useState([])
 
-    const [product, setProduct] = useState([
-        {id:1, name : "TV"},
-        {id:2, name : "Phone"},
-        {id:3, name : "Tablet"},
-    ])
+    const [product, setProduct] = useState([])
+
+    const getProducts = () => {
+        const api = "products";
+
+        instance.get(api)
+        .then( (response) => setProduct(response.data) )
+        .catch( (err) => console.log(err) )
+    }
+
+    const getUsers = ()=> {
+        const api = "users";
+
+        instance.get(api)
+        .then( (response) => setUser(response.data) )
+        .catch( (err) => console.log(err) )
+    }
+
+    useEffect( ()=> {
+        getProducts();
+        getUsers();
+    }, [] )
 
     return (
         <UserContext.Provider value={{user, product}} > 
